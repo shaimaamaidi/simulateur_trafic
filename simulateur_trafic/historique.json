@@ -1,0 +1,86 @@
+{
+    "Tour 1": {
+        "RueA": [
+            "(ID:1, Pos:0, Vit:0)",
+            "(ID:2, Pos:650, Vit:10)"
+        ],
+        "RueB": [
+            "(ID:3, Pos:0, Vit:0)",
+            "(ID:4, Pos:1300, Vit:20)"
+        ],
+        "RueC": [
+            "(ID:5, Pos:0, Vit:0)",
+            "(ID:6, Pos:1300, Vit:20)"
+        ],
+        "RueD": [
+            "(ID:7, Pos:0, Vit:0)",
+            "(ID:8, Pos:1650, Vit:25)",
+            "(ID:9, Pos:900, Vit:10)"
+        ]
+    },
+    "Tour 2": {
+        "RueA": [
+            "(ID:1, Pos:0, Vit:0)"
+        ],
+        "RueB": [
+            "(ID:3, Pos:0, Vit:0)",
+            "(ID:4, Pos:2500, Vit:20)"
+        ],
+        "RueC": [
+            "(ID:5, Pos:0, Vit:0)",
+            "(ID:6, Pos:2500, Vit:20)"
+        ],
+        "RueD": [
+            "(ID:7, Pos:0, Vit:0)",
+            "(ID:8, Pos:3150, Vit:25)",
+            "(ID:9, Pos:1500, Vit:10)"
+        ]
+    },
+    "Tour 3": {
+        "RueA": [
+            "(ID:1, Pos:0, Vit:0)"
+        ],
+        "RueB": [
+            "(ID:3, Pos:0, Vit:0)"
+        ],
+        "RueC": [
+            "(ID:5, Pos:0, Vit:0)",
+            "(ID:6, Pos:3700, Vit:20)"
+        ],
+        "RueD": [
+            "(ID:7, Pos:0, Vit:0)",
+            "(ID:8, Pos:4650, Vit:25)",
+            "(ID:9, Pos:2100, Vit:10)"
+        ]
+    },
+    "Tour 4": {
+        "RueA": [
+            "(ID:1, Pos:0, Vit:0)"
+        ],
+        "RueB": [
+            "(ID:3, Pos:0, Vit:0)"
+        ],
+        "RueC": [
+            "(ID:5, Pos:0, Vit:0)"
+        ],
+        "RueD": [
+            "(ID:7, Pos:0, Vit:0)",
+            "(ID:9, Pos:2700, Vit:10)"
+        ]
+    },
+    "Tour 5": {
+        "RueA": [
+            "(ID:1, Pos:0, Vit:0)"
+        ],
+        "RueB": [
+            "(ID:3, Pos:0, Vit:0)"
+        ],
+        "RueC": [
+            "(ID:5, Pos:0, Vit:0)"
+        ],
+        "RueD": [
+            "(ID:7, Pos:0, Vit:0)",
+            "(ID:9, Pos:3300, Vit:10)"
+        ]
+    }
+}

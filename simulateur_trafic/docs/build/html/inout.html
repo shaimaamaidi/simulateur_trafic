@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html lang="fr" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>inout package &#8212; Documentation SimulateurTrafic 1.0.0</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=05dadb3a"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=e6b791cb"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="prev" title="models package" href="models.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="inout-package">
+<h1>inout package<a class="headerlink" href="#inout-package" title="Lien vers cette rubrique">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Lien vers cette rubrique">¶</a></h2>
+</section>
+<section id="module-inout.affichage">
+<span id="inout-affichage-module"></span><h2>inout.affichage module<a class="headerlink" href="#module-inout.affichage" title="Lien vers cette rubrique">¶</a></h2>
+<p>Ce module contient la définition de la classe Affichage qui fournit des méthodes pour
+afficher et visualiser les statistiques et l’animation d’un réseau routier.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="inout.affichage.Affichage">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">inout.affichage.</span></span><span class="sig-name descname"><span class="pre">Affichage</span></span><a class="reference internal" href="_modules/inout/affichage.html#Affichage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inout.affichage.Affichage" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Représente une classe responsable de l’affichage et de la visualisation.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="inout.affichage.Affichage.afficher_stats">
+<span class="sig-name descname"><span class="pre">afficher_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">analyseur</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inout/affichage.html#Affichage.afficher_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inout.affichage.Affichage.afficher_stats" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Affiche les statistiques enregistrées dans l’analyseur dans la console.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>analyseur</strong> (<a class="reference internal" href="core.html#core.analyseur.Analyseur" title="core.analyseur.Analyseur"><em>Analyseur</em></a>) – objet qui contient les statistiques à afficher</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="inout.affichage.Affichage.animer_traffic">
+<span class="sig-name descname"><span class="pre">animer_traffic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reseau</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">historique</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inout/affichage.html#Affichage.animer_traffic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inout.affichage.Affichage.animer_traffic" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Affiche une animation du trafic à partir de l’historique donné.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reseau</strong> (<a class="reference internal" href="models.html#models.reseau.ReseauRoutier" title="models.reseau.ReseauRoutier"><em>ReseauRoutier</em></a>) – réseau à animer</p></li>
+<li><p><strong>historique</strong> (<em>dict</em><em>[</em><em>int</em><em>, </em><em>dict</em><em>[</em><em>str</em><em>, </em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em><em>]</em>) – état des véhicules par route et par tour</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="inout.affichage.Affichage.get_position">
+<span class="sig-name descname"><span class="pre">get_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">route_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/inout/affichage.html#Affichage.get_position"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inout.affichage.Affichage.get_position" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Calcule la position (x, y) d’un véhicule sur la route en fonction de la distance parcourue.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>route_name</strong> (<em>str</em>) – nom de la route</p></li>
+<li><p><strong>pos</strong> (<em>float</em>) – distance parcourue</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>coordonnées (x, y) du véhicule</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[float, float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="inout.affichage.Affichage.parse_vehicule_info">
+<span class="sig-name descname"><span class="pre">parse_vehicule_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/inout/affichage.html#Affichage.parse_vehicule_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inout.affichage.Affichage.parse_vehicule_info" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Extrait ID, position et vitesse d’un véhicule à partir d’une chaîne.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>s</strong> (<em>str</em>) – chaîne au format « (ID:x, Pos:y, Vit:z) »</p>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>informations du véhicule {“id”: int, “position”: float, “vitesse”: float}</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict ou None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="inout.affichage.Affichage.visualiser_resultats">
+<span class="sig-name descname"><span class="pre">visualiser_resultats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">historique_vitesse_moyenne</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inout/affichage.html#Affichage.visualiser_resultats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inout.affichage.Affichage.visualiser_resultats" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Affiche l’évolution des vitesses moyennes de toutes les routes pour tous les tours.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>historique_vitesse_moyenne</strong> (<em>dict</em><em>[</em><em>int</em><em>, </em><em>dict</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em><em>]</em>) – vitesses moyennes par route et par tour</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-inout.export">
+<span id="inout-export-module"></span><h2>inout.export module<a class="headerlink" href="#module-inout.export" title="Lien vers cette rubrique">¶</a></h2>
+<p>Ce module contient la définition de la classe Export qui fournit des méthodes pour
+exporter les résultats d’une simulation de trafic au format CSV et JSON.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="inout.export.Export">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">inout.export.</span></span><span class="sig-name descname"><span class="pre">Export</span></span><a class="reference internal" href="_modules/inout/export.html#Export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inout.export.Export" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Classe responsable de l’export des résultats d’une simulation.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="inout.export.Export.exporter_resultats_csv">
+<span class="sig-name descname"><span class="pre">exporter_resultats_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">historique</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inout/export.html#Export.exporter_resultats_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inout.export.Export.exporter_resultats_csv" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Exporte l’historique d’une simulation au format CSV.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>historique</strong> (<em>dict</em><em>[</em><em>int</em><em>, </em><em>dict</em><em>[</em><em>str</em><em>, </em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em><em>]</em>) – état de chaque véhicule</p></li>
+<li><p><strong>tour.</strong> (<em>par route pour chaque</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="inout.export.Export.exporter_resultats_json">
+<span class="sig-name descname"><span class="pre">exporter_resultats_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">historique</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inout/export.html#Export.exporter_resultats_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inout.export.Export.exporter_resultats_json" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Exporte l’historique d’une simulation au format JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>historique</strong> (<em>dict</em><em>[</em><em>int</em><em>, </em><em>dict</em><em>[</em><em>str</em><em>, </em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em><em>]</em>) – état de chaque véhicule</p></li>
+<li><p><strong>tour.</strong> (<em>par route pour chaque</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="inout.export.Export.parse_vehicule_info">
+<span class="sig-name descname"><span class="pre">parse_vehicule_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/inout/export.html#Export.parse_vehicule_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inout.export.Export.parse_vehicule_info" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Extrait ID, position et vitesse d’un véhicule à partir d’une chaîne.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>s</strong> (<em>str</em>) – chaîne de caractères au format « (ID:x, Pos:y, Vit:z) »</p>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>informations du véhicule {“id”: int, “position”: float, “vitesse”: float}</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-inout">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-inout" title="Lien vers cette rubrique">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">SimulateurTrafic</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core.html">core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">models package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">inout package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-inout.affichage">inout.affichage module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-inout.export">inout.export module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-inout">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="models.html" title="Chapitre précédent">models package</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Amaidi Chaima.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/inout.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

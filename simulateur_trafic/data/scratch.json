@@ -1,0 +1,59 @@
+{
+  "routes": [
+    {
+      "nom": "RueA",
+      "longueur": 1000,
+      "start": [0, 0],
+      "end": [2, 0],
+      "limite_vitesse": 60,
+      "vehicules": [
+        {"id": 1, "position": 0, "vitesse": 0},
+        {"id": 2, "position": 50, "vitesse": 10}
+      ]
+    },
+    {
+      "nom": "RueB",
+      "longueur": 3000,
+      "start": [2, 0],
+      "end": [2, 6],
+      "limite_vitesse": 30,
+      "vehicules": [
+        {"id": 3, "position": 0, "vitesse": 0},
+        {"id": 4, "position": 100, "vitesse": 20}
+      ]
+    },
+    {
+      "nom": "RueC",
+      "longueur": 4000,
+      "start": [8, 8],
+      "end": [8, 0],
+      "limite_vitesse": 40,
+      "vehicules": [
+        {"id": 5, "position": 0, "vitesse": 0},
+        {"id": 6, "position": 100, "vitesse": 20}
+      ]
+    },
+    {
+      "nom": "RueD",
+      "longueur": 6000,
+      "start": [8, 0],
+      "end": [12, 0],
+      "limite_vitesse": 60,
+      "vehicules": [
+        {"id": 7, "position": 0, "vitesse": 0},
+        {"id": 8, "position": 150, "vitesse": 25},
+        {"id": 9, "position": 300, "vitesse": 10}
+      ]
+    }
+  ],
+  "intersections": [
+    {
+      "nom": "Intersection1",
+      "connecte": ["RueA", "RueB"]
+    },
+    {
+      "nom": "Intersection2",
+      "connecte": ["RueC", "RueD"]
+    }
+  ]
+}

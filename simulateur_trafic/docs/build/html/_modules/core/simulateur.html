@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html lang="fr" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>core.simulateur &#8212; Documentation SimulateurTrafic 1.0.0</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../_static/documentation_options.js?v=05dadb3a"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/translations.js?v=e6b791cb"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Code source de core.simulateur</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Ce module contient la définition de la classe Simulateur qui permet de gérer la simulation</span>
+<span class="sd">du trafic sur un réseau routier.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">models.reseau</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReseauRoutier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">core.analyseur</span><span class="w"> </span><span class="kn">import</span> <span class="n">Analyseur</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">inout.export</span><span class="w"> </span><span class="kn">import</span> <span class="n">Export</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">inout.affichage</span><span class="w"> </span><span class="kn">import</span> <span class="n">Affichage</span>
+
+
+<div class="viewcode-block" id="Simulateur">
+<a class="viewcode-back" href="../../modules.html#core.simulateur.Simulateur">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Simulateur</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Représente un simulateur d&#39;un réseau routier.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        reseau (ReseauRoutier): le réseau routier à simuler</span>
+<span class="sd">        stats (dict): dictionnaire contenant des statistiques de simulation</span>
+<span class="sd">            - &quot;tours_effectues&quot; (int): nombre de tours effectués</span>
+<span class="sd">            - &quot;historique&quot; (dict[int, dict[str, list[str]]]): états des rues par tour</span>
+<span class="sd">        analyseur (Analyseur): objet pour analyser le réseau</span>
+<span class="sd">        export (Export): objet pour l&#39;exportation des données</span>
+<span class="sd">        affichage (Affichage): objet pour afficher les résultats dans la console et graphiques</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fichier_config</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialise le simulateur avec un fichier de configuration JSON.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            fichier_config (str): chemin vers le fichier JSON contenant la configuration</span>
+<span class="sd">                du réseau routier (routes et intersections)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fichier_config</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">reseau</span> <span class="o">=</span> <span class="n">ReseauRoutier</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stats</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;tours_effectues&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;historique&quot;</span><span class="p">:</span> <span class="p">{}</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">analyseur</span> <span class="o">=</span> <span class="n">Analyseur</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reseau</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">export</span> <span class="o">=</span> <span class="n">Export</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">affichage</span> <span class="o">=</span> <span class="n">Affichage</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Simulateur.lancer_simulation">
+<a class="viewcode-back" href="../../modules.html#core.simulateur.Simulateur.lancer_simulation">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lancer_simulation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_tours</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">delta_t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">afficher</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">exporter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Lance la simulation du réseau routier pour un nombre de tours donné.</span>
+
+<span class="sd">        Pour chaque tour, la méthode :</span>
+<span class="sd">        - Fait évoluer les véhicules sur chaque route</span>
+<span class="sd">        - Met à jour les statistiques (&quot;tours_effectues&quot;,&quot;historique&quot;)</span>
+<span class="sd">        - Met à jour les attributs de l&#39;objet Analyseur</span>
+<span class="sd">        - Affiche les résultats intermédiaires</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            n_tours (int): nombre total de tours à simuler</span>
+<span class="sd">            delta_t (float): durée d&#39;un tour en unité de temps</span>
+<span class="sd">            afficher (bool, optional): si True, affiche les statistiques et visualisations</span>
+<span class="sd">            exporter (bool, optional): si True, exporte les résultats en CSV et JSON</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">tour</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_tours</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reseau</span><span class="o">.</span><span class="n">simuler</span><span class="p">(</span><span class="n">delta_t</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="s2">&quot;tours_effectues&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">etat</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">route</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">reseau</span><span class="o">.</span><span class="n">routes</span><span class="p">:</span>
+                <span class="n">etat</span><span class="p">[</span><span class="n">route</span><span class="o">.</span><span class="n">nom</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="sa">f</span><span class="s2">&quot;(ID:</span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">identifiant</span><span class="si">}</span><span class="s2">, Pos:</span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">position</span><span class="si">}</span><span class="s2">, Vit:</span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">vitesse</span><span class="si">}</span><span class="s2">)&quot;</span>
+                    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">route</span><span class="o">.</span><span class="n">vehicules</span>
+                <span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="s2">&quot;historique&quot;</span><span class="p">][</span><span class="n">tour</span><span class="p">]</span> <span class="o">=</span> <span class="n">etat</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">analyseur</span><span class="o">.</span><span class="n">update_stats</span><span class="p">(</span><span class="n">tour</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">afficher</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">affichage</span><span class="o">.</span><span class="n">afficher_stats</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">analyseur</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">affichage</span><span class="o">.</span><span class="n">visualiser_resultats</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">analyseur</span><span class="o">.</span><span class="n">vitesse_moyenne</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">affichage</span><span class="o">.</span><span class="n">animer_traffic</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reseau</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="s2">&quot;historique&quot;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">exporter</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">export</span><span class="o">.</span><span class="n">exporter_resultats_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="s2">&quot;historique&quot;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">export</span><span class="o">.</span><span class="n">exporter_resultats_json</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="s2">&quot;historique&quot;</span><span class="p">])</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">SimulateurTrafic</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../core.html">core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">models package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../inout.html">inout package</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Code du module</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Amaidi Chaima.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
