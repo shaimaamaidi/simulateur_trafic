@@ -5,7 +5,10 @@ description = "un simulateur modulaire du trafic routier"
 authors = [
     {name = "Your Name",email = "amaidiamaidi@gmail.com"}
 ]
-packages = [{ include = "simulateur_trafic" }]
+packages = [
+    { include = "simulateur_trafic", from = "." }
+]
+
 license = {text = "MIT"}
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
