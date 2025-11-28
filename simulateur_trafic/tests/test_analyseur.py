@@ -1,4 +1,4 @@
-from simulateur_trafic.tests.conftest import reseau_simple, analyseur_exemple, route_simple
+from simulateur_trafic.tests.conftest import analyseur_exemple, route_simple
 
 
 def test_update_stats(analyseur_exemple):
