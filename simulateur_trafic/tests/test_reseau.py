@@ -1,6 +1,5 @@
 import pytest
 
-from exceptions.exceptions import VehiculeInvalideError
 from models.reseau import ReseauRoutier
 from simulateur_trafic.models.route import Route
 from simulateur_trafic.tests.conftest import reseau_simple, route_simple, vehicule_exemple
