@@ -8,6 +8,7 @@ from simulateur_trafic.models.reseau import ReseauRoutier
 from simulateur_trafic.core.analyseur import Analyseur
 from simulateur_trafic.inout.export import Export
 from simulateur_trafic.inout.affichage import Affichage
+from simulateur_trafic.exceptions.exceptions import VehiculeInvalideError
 
 
 class Simulateur:
@@ -50,6 +51,9 @@ class Simulateur:
             return
         except json.JSONDecodeError:
             print("Erreur : fichier de configuration invalide.")
+            return
+        except VehiculeInvalideError as e:
+            print(e)
             return
 
     def lancer_simulation(self, n_tours: int, delta_t: float, afficher: bool = True, exporter: bool = True):

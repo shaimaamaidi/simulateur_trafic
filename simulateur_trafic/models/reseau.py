@@ -3,7 +3,6 @@ Ce module contient la définition de la classe ReseauRoutier pour le simulateur 
 """
 
 from simulateur_trafic.models.route import Route
-from simulateur_trafic.exceptions.exceptions import VehiculeInvalideError
 from simulateur_trafic.exceptions.exceptions import VitesseInvalideError
 
 
@@ -41,22 +40,19 @@ class ReseauRoutier:
         Returns:
             ReseauRoutier: instance construite à partir de la configuration.
         """
-        try:
-            reseau = cls()
-            for r in config.get("routes", []):
-                route = Route(
-                    r["nom"], r["longueur"], r["start"], r["end"],
-                    r["limite_vitesse"], r["vehicules"]
-                )
-                reseau.ajouter_route(route)
+        reseau = cls()
+        for r in config.get("routes", []):
+            route = Route(
+                r["nom"], r["longueur"], r["start"], r["end"],
+                r["limite_vitesse"], r["vehicules"]
+            )
+            reseau.ajouter_route(route)
 
-            for inter in config.get("intersections", []):
-                routes_obj = [r for r in reseau.routes if r.nom in inter["connecte"]]
-                reseau.ajouter_intersection(inter["nom"], routes_obj)
+        for inter in config.get("intersections", []):
+            routes_obj = [r for r in reseau.routes if r.nom in inter["connecte"]]
+            reseau.ajouter_intersection(inter["nom"], routes_obj)
 
-            return reseau
-        except VehiculeInvalideError as e:
-            print(e)
+        return reseau
 
     def ajouter_route(self, route: Route):
         """

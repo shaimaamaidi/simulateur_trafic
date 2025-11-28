@@ -42,7 +42,7 @@ class Affichage:
                 for veh_id, tps in temps.items():
                     print(f"  {route} - Veh {veh_id} : {tps:.2f} unités de temps")
 
-    def visualiser_resultats(self, historique_vitesse_moyenne):
+    def visualiser_resultats(self, historique_vitesse_moyenne, afficher=True):
         """
         Affiche l'évolution des vitesses moyennes de toutes les routes pour tous les tours.
 
@@ -66,7 +66,8 @@ class Affichage:
         plt.xticks(tours)
         plt.legend()
         plt.grid(True)
-        plt.show()
+        if afficher:
+            plt.show()
 
     def parse_vehicule_info(self, s: str) -> dict | None:
         """

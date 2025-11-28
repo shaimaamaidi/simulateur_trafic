@@ -121,3 +121,5 @@ class Route:
                 self.mettre_a_jour_vehicules(dt)
         except TempsAvancementInvalidError as e:
             print(f"Erreur dans l'avancement du temps du FeuRouge :{e}")
+
+
