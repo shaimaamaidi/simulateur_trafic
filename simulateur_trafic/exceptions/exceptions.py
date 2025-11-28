@@ -21,3 +21,13 @@ class VitesseInvalideError(SimulationError):
 class PositionInvalideError(SimulationError):
     """Erreur quand la position d'un véhicule est invalide."""
     pass
+
+
+class CycleInvalidError(SimulationError):
+    """Erreur quand on passe au paramètre d'initialisation d'un FeuRouge une valeur négative pour le cycle."""
+    pass
+
+
+class TempsAvancementInvalidError(SimulationError):
+    """Erreur quand on passe un temps négatif pour avancement du temps du FeuRouge."""
+    pass

@@ -36,12 +36,9 @@ class Vehicule:
         Args:
             temps (float): durée pendant laquelle le véhicule avance.
         """
-        try:
-            if self.vitesse < 0:
-                raise VitesseInvalideError("La vitesse ne peut pas être négative.")
-            self.position += self.vitesse * temps
-        except VitesseInvalideError as e:
-            print(f"Erreur dans avancer(): {e}")
+        if self.vitesse < 0:
+            raise VitesseInvalideError("La vitesse ne peut pas être négative.")
+        self.position += self.vitesse * temps
 
     def changer_de_route(self, nouvelle_route):
         """

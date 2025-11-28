@@ -3,6 +3,9 @@ Ce module contient la définition de la classe ReseauRoutier pour le simulateur 
 """
 
 from simulateur_trafic.models.route import Route
+from simulateur_trafic.exceptions.exceptions import VehiculeInvalideError
+from simulateur_trafic.exceptions.exceptions import VitesseInvalideError
+
 
 class ReseauRoutier:
     """
@@ -38,19 +41,22 @@ class ReseauRoutier:
         Returns:
             ReseauRoutier: instance construite à partir de la configuration.
         """
-        reseau = cls()
-        for r in config.get("routes", []):
-            route = Route(
-                r["nom"], r["longueur"], r["start"], r["end"],
-                r["limite_vitesse"], r["vehicules"]
-            )
-            reseau.ajouter_route(route)
+        try:
+            reseau = cls()
+            for r in config.get("routes", []):
+                route = Route(
+                    r["nom"], r["longueur"], r["start"], r["end"],
+                    r["limite_vitesse"], r["vehicules"]
+                )
+                reseau.ajouter_route(route)
 
-        for inter in config.get("intersections", []):
-            routes_obj = [r for r in reseau.routes if r.nom in inter["connecte"]]
-            reseau.ajouter_intersection(inter["nom"], routes_obj)
+            for inter in config.get("intersections", []):
+                routes_obj = [r for r in reseau.routes if r.nom in inter["connecte"]]
+                reseau.ajouter_intersection(inter["nom"], routes_obj)
 
-        return reseau
+            return reseau
+        except VehiculeInvalideError as e:
+            print(e)
 
     def ajouter_route(self, route: Route):
         """
@@ -78,8 +84,11 @@ class ReseauRoutier:
         Args:
             temps (float): durée de la simulation pour mettre à jour les véhicules.
         """
-        for route in self.routes:
-            route.mettre_a_jour_vehicules(temps)
+        try:
+            for route in self.routes:
+                route.mettre_a_jour_vehicules(temps)
+        except VitesseInvalideError as e:
+            print(f"Erreur losrde l'avancement des véhicules :{e}")
 
     def etat_reseau(self) -> dict[str, list[int]]:
         """

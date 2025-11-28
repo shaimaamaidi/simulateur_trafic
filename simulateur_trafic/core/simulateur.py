@@ -32,25 +32,18 @@ class Simulateur:
             fichier_config (str): chemin vers le fichier JSON contenant la configuration
                 du réseau routier (routes et intersections)
         """
-        try:
-            with open(fichier_config, "r", encoding="utf-8") as f:
-                config = json.load(f)
+        with open(fichier_config, "r", encoding="utf-8") as f:
+            config = json.load(f)
 
-            self.reseau = ReseauRoutier.from_json(config)
-            self.stats = {
-                "tours_effectues": 0,
-                "historique": {}
-            }
-            self.analyseur = Analyseur(self.reseau)
-            self.export = Export()
-            self.affichage = Affichage()
+        self.reseau = ReseauRoutier.from_json(config)
+        self.stats = {
+            "tours_effectues": 0,
+            "historique": {}
+        }
+        self.analyseur = Analyseur(self.reseau)
+        self.export = Export()
+        self.affichage = Affichage()
 
-        except FileNotFoundError:
-            print("Erreur : fichier de configuration manquant.")
-            return
-        except json.JSONDecodeError:
-            print("Erreur : fichier de configuration invalide.")
-            return
 
     def lancer_simulation(self, n_tours: int, delta_t: float, afficher: bool = True, exporter: bool = True):
         """
@@ -68,32 +61,30 @@ class Simulateur:
             afficher (bool, optional): si True, affiche les statistiques et visualisations
             exporter (bool, optional): si True, exporte les résultats en CSV et JSON
         """
-        try:
-            if n_tours <= 0:
-                raise ValueError("Le nombre de tours doit être strictement positif.")
-            if delta_t <= 0:
-                raise ValueError("Le delta_t doit être strictement positif.")
+        if n_tours <= 0:
+            raise ValueError("Le nombre de tours doit être strictement positif.")
+        if delta_t <= 0:
+            raise ValueError("Le delta_t doit être strictement positif.")
 
-            for tour in range(1, n_tours + 1):
-                self.reseau.simuler(delta_t)
+        for tour in range(1, n_tours + 1):
+            self.reseau.simuler(delta_t)
 
-                self.stats["tours_effectues"] += 1
-                etat = {}
-                for route in self.reseau.routes:
-                    etat[route.nom] = [
-                        f"(ID:{v.identifiant}, Pos:{v.position}, Vit:{v.vitesse})"
-                        for v in route.vehicules
-                    ]
-                self.stats["historique"][tour] = etat
-                self.analyseur.update_stats(tour)
+            self.stats["tours_effectues"] += 1
+            etat = {}
+            for route in self.reseau.routes:
+                etat[route.nom] = [
+                    f"(ID:{v.identifiant}, Pos:{v.position}, Vit:{v.vitesse})"
+                    for v in route.vehicules
+                ]
+            self.stats["historique"][tour] = etat
+            self.analyseur.update_stats(tour)
 
-            if afficher:
-                self.affichage.afficher_stats(self.analyseur)
-                self.affichage.visualiser_resultats(self.analyseur.vitesse_moyenne)
-                self.affichage.animer_traffic(self.reseau, self.stats["historique"])
+        if afficher:
+            self.affichage.afficher_stats(self.analyseur)
+            self.affichage.visualiser_resultats(self.analyseur.vitesse_moyenne)
+            self.affichage.animer_traffic(self.reseau, self.stats["historique"])
 
-            if exporter:
-                self.export.exporter_resultats_csv(self.stats["historique"])
-                self.export.exporter_resultats_json(self.stats["historique"])
-        except ValueError as e:
-            print(f"Erreur de paramètres : {e}")
+        if exporter:
+            self.export.exporter_resultats_csv(self.stats["historique"])
+            self.export.exporter_resultats_json(self.stats["historique"])
+
