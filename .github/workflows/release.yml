@@ -17,13 +17,13 @@ jobs:
       with:
         python-version: 3.12
 
-    - name: Install dependencies
+    - name: Install build tools
       run: |
-        pip install poetry
-        pip install twine
+        pip install --upgrade pip
+        pip install build twine
 
-    - name: Build package
-      run: poetry build
+    - name: Build package (wheel and sdist)
+      run: python -m build --wheel --sdist
 
     - name: Publish to PyPI with Twine
       env:
