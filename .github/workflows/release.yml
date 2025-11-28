@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.12'
-          
+
       - name: Install build tools
         run: |
           python -m pip install --upgrade pip setuptools wheel twine
@@ -34,7 +34,7 @@ jobs:
       - name: Build package
         run: |
           cd simulateur_trafic
-          python setup.py bdist_wheel
+          python setup.py bdist_wheel --dist-dir ../dist
 
       # 5. Publier sur PyPI avec token
       - name: Publish package
@@ -42,4 +42,4 @@ jobs:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
         run: |
-          twine upload dist/*
+          twine upload dist/*.whl
