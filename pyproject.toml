@@ -1,9 +1,9 @@
 [project]
-name = "simulateur_traffique_shaimaa"
+name = "simulateur_trafic"
 version = "2.0"
 description = "un simulateur modulaire du trafic routier"
 authors = [
-    {name = "Your Name",email = "you@example.com"}
+    {name = "Your Name",email = "amaidiamaidi@gmail.com"}
 ]
 license = {text = "MIT"}
 readme = "README.md"
