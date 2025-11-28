@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='simulateur_trafic_package',
-    version='0.1.0',
+    version='0.1.1',
     author='Amaidi Chaima',
     author_email='amaidiamaidi13@gmail.com',
     description=(
