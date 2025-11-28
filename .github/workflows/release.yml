@@ -29,6 +29,7 @@ jobs:
       # 4. Build du package avec bdist
       - name: Build package
         run: |
+          cd simulateur_trafic
           python setup.py bdist_wheel
 
       # 5. Publier sur PyPI avec token
